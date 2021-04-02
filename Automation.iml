@@ -9,5 +9,24 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="byte-buddy-1.8.15" level="application" />
     <orderEntry type="library" name="org.testng:testng:6.14.3" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/lib/unirest-java-3.11.03.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/unirest-java-3.11.03-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="commons-codec-1.11" level="project" />
+    <orderEntry type="library" name="commons-logging-1.2" level="project" />
+    <orderEntry type="library" name="gson-2.8.6" level="project" />
+    <orderEntry type="library" name="httpasyncclient-4.1.4" level="project" />
+    <orderEntry type="library" name="httpcore-4.4.13" level="project" />
+    <orderEntry type="library" name="httpcore-nio-4.4.13" level="project" />
+    <orderEntry type="library" name="httpmime-4.5.13" level="project" />
+    <orderEntry type="library" name="unirest-java-3.11.03" level="project" />
   </component>
 </module>
