@@ -52,14 +52,11 @@ public class automation {
 
         //Caso 1 - E2E
       ConfigInit();
-        Login();
-        DeniedGps();
-       // AllowGps();
-        //ProductDepartment();
-        SearchBarSKU();
-        ShoppingCart();
-        Checkout();
-        PaymentMethods();
+
+      Login MyLogin = new Login();
+        MyLogin.correctLogin();
+
+
 
         //Caso 2 - Mi cuenta - Mis tarjetas input
     /*    ConfigInit();
@@ -213,147 +210,220 @@ public class automation {
        ad = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), dc);
     }
 
-    public static void Login () throws MalformedURLException {
+    public class WelcomeScreen {
 
-        /*WebDriverWait wait = new WebDriverWait(ad, 100);
-        MobileElement WelcomeScreen = wait.until(ExpectedConditions.visibilityOfElementLocated(ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView")));
-        modalCamposIncompletos = (MobileElement) ad.findElementById("android:id/button1");*/
+        MobileElement WelcomeScreenBtnSkip = ad.findElementByAccessibilityId("welcome-btn-skip");
 
-        //boolean x = waitForPresence(ad, 60000, "hola");
+        public void SkipWelcomeScreen() throws MalformedURLException {
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+            WelcomeScreenBtnSkip.click();
+        }
 
-        ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-        //   boolean x = waitForPresence(ad, 60000, "hola");
+        public void CompareTextWelcomeScreen() throws MalformedURLException {
 
-       // MobileElement WelcomeScreen = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView");
-      //  MobileElement WelcomeScreen;
-        //WelcomeScreen = (MobileElement)ad.findElementByName("[@content-desc="welcome-btn-skip"]");
-        MobileElement WelcomeScreen = ad.findElementByAccessibilityId("welcome-btn-skip");
+            //Comparar el texto del welcome screen
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
-      //  boolean isElementPresent = WelcomeScreen.isDisplayed();
-        WelcomeScreen.click();
+        }
 
-        //Cmabio de ambiente
+        public void SwipeWelcomeScreen() throws MalformedURLException {
+
+            //Navegar entre las pantallas del welcome screen y dar clic en el boton comenzar
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+
+        }
+
+
+    }
+
+    public  class Login {
         MobileElement env = ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[8]");
-        env.click();
-        env.click();
-        env.click();
-        env.click();
-
-
-
-        //emailInput
         MobileElement email = ad.findElementByAccessibilityId("Email-input");
-        email.click();
-        email.sendKeys("loginnovey4@gmail.com");
-        //passwordInput
         MobileElement passwordInput = ad.findElementByAccessibilityId("Password-input");
-        passwordInput.click();
-        passwordInput.sendKeys("0101!Abcd");
-
-        //boton iniciar sesion
         MobileElement iniciarSesionBtn = ad.findElementByAccessibilityId("signIn-btn");
-        iniciarSesionBtn.click();
+        String UserEmail;
+        String UserPassword;
+
+
+        public void changeEnv() throws MalformedURLException {
+            env.click();
+            env.click();
+            env.click();
+            env.click();
+        }
+        public  void login() throws MalformedURLException {
+
+        }
+
+        public  void correctLogin() throws MalformedURLException {
+
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+            UserEmail = "prueba02.hnl@gmail.com";
+            UserPassword = "pruebahnl18";
+
+            //  boolean isElementPresent = WelcomeScreen.isDisplayed();
+            //emailInput
+            email.click();
+            email.sendKeys(UserEmail);
+            //passwordInput
+            passwordInput.click();
+            passwordInput.sendKeys("0101!Abcd");
+
+            //boton iniciar sesion
+
+            iniciarSesionBtn.click();
+
+
+        }
+
+        public void incorrectEmail() throws MalformedURLException {
+
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+            UserEmail = "prueba02.hnl@gmail.com";
+            UserPassword = "pruebahnl18";
+
+            //  boolean isElementPresent = WelcomeScreen.isDisplayed();
+            //emailInput
+            email.click();
+            email.sendKeys(UserEmail);
+            //passwordInput
+            passwordInput.click();
+            passwordInput.sendKeys("0101!Abcd");
+
+            //boton iniciar sesion
+
+            iniciarSesionBtn.click();
+
+
+        }
+
 
 
     }
-    public static void AllowGps () throws MalformedURLException {
-        ad.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
-        MobileElement btnAllowGps = ad.findElement(org.openqa.selenium.By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button"));
-        btnAllowGps.click();
+    public class Permission {
+
+        public void allowGps() throws MalformedURLException {
+            ad.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
+            MobileElement btnAllowGps = ad.findElement(org.openqa.selenium.By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button"));
+            btnAllowGps.click();
 
 
-    }
+        }
 
 
+        public void deniedGps() throws MalformedURLException {
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+            MobileElement btnDenyGps = ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
+            btnDenyGps.click();
 
-    public static void DeniedGps () throws MalformedURLException {
-        ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-        MobileElement btnDenyGps = ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
-        btnDenyGps.click();
+        }
 
-    }
+        public void allowTakePicture() throws MalformedURLException {
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+            MobileElement btnAllowTakePic = ad.findElementById("com.android.permissioncontroller:id/permission_allow_button");
+            btnAllowTakePic.click();
 
-    public static void ProductDepartment () throws MalformedURLException {
-       ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        }
 
-
-
-
-        MobileElement deparmentMenu = ad.findElementByAccessibilityId("Departamentos, tab, 2 of 4");
-        deparmentMenu.click();
-
-       ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-
-
-        //MobileElement departmentOptions = ad.findElementById("ca5594fe-a7a5-4c4d-9b46-524da0406255");
-        //departmentOptions.click();
-
-        // MobileElement departmentOptions = (MobileElement) ad.findElementByName("Herramientas");  notworking
+        public void deniedTakePicture() throws MalformedURLException {
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+            MobileElement btnDeniedTakePic = ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
+            btnDeniedTakePic.click();
 
 
-      //  MobileElement departmentOptions = (MobileElement) ad.findElementByClassName("android.widget.ScrollView");
-        MobileElement departmentOptions = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView");
-        TouchActions action = new TouchActions(ad);
-        action.scroll(departmentOptions, 10, 100);
-        action.perform();
-
-
-
-        MobileElement pinturaDep = (MobileElement) ad.findElementByXPath( "(//android.view.ViewGroup[@content-desc=\"department-btn\"])[5]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageVi");
-        pinturaDep.click();
-
-        MobileElement tapesSubc = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.HorizontalScrollView[1]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageView");
-        tapesSubc.click();
-
-        //Clic en el producto   **  Pendiente validar que muestre el boton agregar al carrito o que busque otro producto
-        MobileElement productTape = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup");
-        productTape .click();
+        }
 
     }
 
-    public static void SearchBarSKU () throws MalformedURLException {
-       String sku1 = "I3090045";
+    public class SearchProduct {
+        String sku;
+        String productName;
         MobileElement inputSearchBtn = (MobileElement) ad.findElementByAccessibilityId("Search-bar-btn");
-        inputSearchBtn.click();
-        //AllowTakePicture();
         MobileElement inputSearchBar = ad.findElementByAccessibilityId("Search-bar-input");
-       inputSearchBar.click();
-        inputSearchBar.sendKeys("I3090045");
-        Assert.assertEquals(sku1, inputSearchBar.getText());
-        ad.pressKey(new KeyEvent(AndroidKey.ENTER));
         MobileElement cartPriceList = (MobileElement) ad.findElementByAccessibilityId("go-to-product-detail-btn");
-        Assert.assertEquals(cartPriceList.getText(), sku1);
+
+        public void productDepartment() throws MalformedURLException {
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+
+
+            MobileElement deparmentMenu = ad.findElementByAccessibilityId("Departamentos, tab, 2 of 4");
+            deparmentMenu.click();
+
+            ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+
+
+            //MobileElement departmentOptions = ad.findElementById("ca5594fe-a7a5-4c4d-9b46-524da0406255");
+            //departmentOptions.click();
+
+            // MobileElement departmentOptions = (MobileElement) ad.findElementByName("Herramientas");  notworking
+
+
+            //  MobileElement departmentOptions = (MobileElement) ad.findElementByClassName("android.widget.ScrollView");
+            MobileElement departmentOptions = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView");
+            TouchActions action = new TouchActions(ad);
+            action.scroll(departmentOptions, 10, 100);
+            action.perform();
+
+
+            MobileElement pinturaDep = (MobileElement) ad.findElementByXPath("(//android.view.ViewGroup[@content-desc=\"department-btn\"])[5]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageVi");
+            pinturaDep.click();
+
+            MobileElement tapesSubc = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.HorizontalScrollView[1]/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageView");
+            tapesSubc.click();
+
+            //Clic en el producto   **  Pendiente validar que muestre el boton agregar al carrito o que busque otro producto
+            MobileElement productTape = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup");
+            productTape.click();
+
+        }
+
+        public String searchBarSKU() {
+            String sku = "I3090045";
+            inputSearchBtn.click();
+            inputSearchBar.click();
+            inputSearchBar.sendKeys("sku");
+            Assert.assertEquals(sku, inputSearchBar.getText());
+            ad.pressKey(new KeyEvent(AndroidKey.ENTER));
+
+            Assert.assertEquals(cartPriceList.getText(), sku);
+
+            return (sku);
+
+
+        }
+
+        public void SearchBarProductName() throws MalformedURLException {
+            productName = "escoba";
+
+            inputSearchBtn.click();
+            inputSearchBar.click();
+            inputSearchBar.sendKeys(productName);
+            Assert.assertEquals(productName, inputSearchBar.getText());
+            ad.pressKey(new KeyEvent(AndroidKey.ENTER));
+
+            Assert.assertEquals(cartPriceList.getText(), productName);
+
+
+            inputSearchBar.sendKeys("escoba");
+
+
+        }
+
+        public void SearchBarSugested() throws MalformedURLException {
+            MobileElement inputSearchBar = ad.findElementByAccessibilityId("Search-bar-btn");
+            inputSearchBar.sendKeys("");
+
+        }
+
+
 
 
 
     }
-    public static void SearchBarProductName () throws MalformedURLException {
-        MobileElement inputSearchBar = ad.findElementByAccessibilityId("Search-bar-btn");
-        inputSearchBar.sendKeys("escoba");
 
+    public class Buy {
 
-    }
-    public static void SearchBarSugested () throws MalformedURLException {
-        MobileElement inputSearchBar = ad.findElementByAccessibilityId("Search-bar-btn");
-        inputSearchBar.sendKeys("");
-
-    }
-    public static void AllowTakePicture() throws MalformedURLException {
-        ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-        MobileElement btnAllowTakePic = ad.findElementById("com.android.permissioncontroller:id/permission_allow_button");
-        btnAllowTakePic.click();
-
-    }
-
-    public static void DeniedTakePicture() throws MalformedURLException {
-        ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-        MobileElement btnDeniedTakePic = ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
-        btnDeniedTakePic.click();
-
-
-    }
-
-    public static void ShoppingCart () throws MalformedURLException {
+        public void ShoppingCart() throws MalformedURLException {
    /*  MobileElement listaAgregarCarrito = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.TextView");
             listaAgregarCarrito.click();
 
@@ -379,15 +449,15 @@ public class automation {
 
         ad.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);*/
 
-        SearchBarSKU();
-        MobileElement listPriceAddCartBtn = (MobileElement) ad.findElementByAccessibilityId("add-to-card-from-list-btn");
-        listPriceAddCartBtn.click();
-        Assert.assertEquals(cartPriceList.getText(), sku1);
+/*            SearchBarSKU();
 
+            MobileElement listPriceAddCartBtn = (MobileElement) ad.findElementByAccessibilityId("add-to-card-from-list-btn");
+            listPriceAddCartBtn.click();
+            Assert.assertEquals(SearchBarSKU.cartPriceList.getText(), sku1);
 
+*/
+        }
     }
-
-
     public static void Checkout () throws MalformedURLException {
 
         //clic en el boton pagar
