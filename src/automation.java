@@ -1,20 +1,25 @@
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
 public class automation {
-    public static AndroidDriver<AndroidElement> ad;
-    // protected AndroidDriver driver;
 
-    private Object By;
+    public static AndroidDriver<AndroidElement> ad;
+    private static Object By;
 
     public static MobileElement mobileElement;
 
@@ -32,40 +37,43 @@ public class automation {
 
     public static void main(String args[]) throws MalformedURLException {
 
-
         //Caso 1 - E2E
         ConfigInit();
 
-        WelcomeScreen MyWScreen = new WelcomeScreen(ad);
-        MyWScreen.SkipWelcomeScreen();
-
-
+        WelcomeScreen MyWelcomeScreen = new WelcomeScreen(ad);
+        MyWelcomeScreen.SkipWelcomeScreen();
 
         Login MyLogin = new Login(ad);
-      //  MyLogin.changeEnv();
         MyLogin.correctLogin();
 
-        MobileElement el5 = (MobileElement) ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]");
-        el5.click();
-       /* MobileElement el4 = (MobileElement) _ad.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout");
-        el4.click();*/
-        //  MyPermission.getBtnAllowGps().click();
-        MobileElement el6 = (MobileElement) ad.findElementById("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
-        el6.click();
+        Permission MyPermission = new Permission(ad);
+        MyPermission.AllowGps();
 
-        Sucursal MySucursal = new Sucursal(ad);
-        MySucursal.ValidarSucursal();
+        SearchProduct MySearchProduct = new SearchProduct(ad);
+        MySearchProduct.searchBarSKU();
+
+        ShoppingCart MyShopingCart = new ShoppingCart(ad);
+        MyShopingCart.addProduct();
+        MyShopingCart.btnGoToCheckout();
+
+        CheckoutDelivery MyCheckout = new CheckoutDelivery(ad);
+        MyCheckout.SelectAddress();
+
+        CheckoutSucursal MyCheckoutSucursal = new CheckoutSucursal(ad);
+        MyCheckoutSucursal.tabSucursal();
 
 
 
-    /*   Login MyLogin = new Login(ad);
-        MyLogin.correctLogin();
-    }
 
-    SearchProduct MySearchProduct = new SearchProduct(ad);
-        MySearchProduct.correctLogin();*/
+
+       /* Sucursal MySucursal = new Sucursal(ad);
+        MySucursal.ValidarSucursal();*/
+
+
+
+
+
+
+
     }
 }
-
-
-

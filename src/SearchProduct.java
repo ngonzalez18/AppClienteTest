@@ -10,13 +10,33 @@ import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 public class SearchProduct {
-    public AndroidDriver<AndroidElement> _ad;
+    private AndroidDriver<AndroidElement> _ad;
     String sku;
     String productName;
-    MobileElement inputSearchBtn = (MobileElement) automation.ad.findElementByAccessibilityId("Search-bar-btn");
-    MobileElement inputSearchBar = automation.ad.findElementByAccessibilityId("Search-bar-input");
-    MobileElement cartPriceList = (MobileElement) automation.ad.findElementByAccessibilityId("go-to-product-detail-btn");
-    MobileElement deparmentMenu = automation.ad.findElementByAccessibilityId("Departamentos, tab, 2 of 4");
+    private MobileElement searchBarBtn = null;
+    private MobileElement searchBarInput = null;
+    private MobileElement productDetailBtn = null;
+    private MobileElement deparmentMenu = null;
+    private MobileElement addToCartFromListBtn;
+
+
+
+    public SearchProduct(AndroidDriver<AndroidElement> ad) {
+        _ad = ad;
+        try {
+
+
+
+        searchBarBtn  = _ad.findElementByAccessibilityId("Search-bar-btn");
+        searchBarInput = _ad.findElementByAccessibilityId("Search-bar-input");
+        productDetailBtn  =  _ad.findElementByAccessibilityId("go-to-product-detail-btn");
+        deparmentMenu = _ad.findElementByAccessibilityId("Departamentos, tab, 2 of 4");
+        addToCartFromListBtn = _ad.findElementByAccessibilityId("add-to-card-from-list-btn");
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
     public void productDepartment() throws MalformedURLException {
         _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
@@ -46,33 +66,38 @@ public class SearchProduct {
 
     }
 
-    public String searchBarSKU() {
-        String sku = "I3090045";
-        inputSearchBtn.click();
-        inputSearchBar.click();
-        inputSearchBar.sendKeys("sku");
-        Assert.assertEquals(sku, inputSearchBar.getText());
+    public void searchBarSKU() {
+        try {
+        sku = "I3090045";
+        searchBarBtn.click();
+        //inputSearchBar.click();
+         searchBarInput.sendKeys(sku);
+        Assert.assertEquals(sku, searchBarInput.getText());
         _ad.pressKey(new KeyEvent(AndroidKey.ENTER));
 
-        Assert.assertEquals(cartPriceList.getText(), sku);
+        Assert.assertEquals(productDetailBtn.getText(), sku);
+        addToCartFromListBtn.click();
 
-        return (sku);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+        //return (sku);
 
     }
 
     public void SearchBarProductName() throws MalformedURLException {
         productName = "escoba";
 
-        inputSearchBtn.click();
-        inputSearchBar.click();
-        inputSearchBar.sendKeys(productName);
-        Assert.assertEquals(productName, inputSearchBar.getText());
+        searchBarBtn.click();
+        searchBarInput.sendKeys(productName);
+        Assert.assertEquals(productName, searchBarInput.getText());
         _ad.pressKey(new KeyEvent(AndroidKey.ENTER));
 
-        Assert.assertEquals(cartPriceList.getText(), productName);
+        Assert.assertEquals(productDetailBtn.getText(), productName);
 
 
-        inputSearchBar.sendKeys("escoba");
+
 
     }
 

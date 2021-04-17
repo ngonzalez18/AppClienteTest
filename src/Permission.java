@@ -6,26 +6,37 @@ import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 public class Permission {
-    private AndroidDriver<AndroidElement> _ad;
 
-    private MobileElement btnAllowGps = automation.ad.findElementById("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
-    MobileElement btnDenyGps = automation.ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
-    MobileElement btnAllowTakePic = automation.ad.findElementById("com.android.permissioncontroller:id/permission_allow_button");
-    MobileElement btnDeniedTakePic = automation.ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
+    private AndroidDriver<AndroidElement> _ad;
+    private MobileElement btnAllowGps = null;
+    private MobileElement btnDenyGps = null;
+    private MobileElement btnAllowTakePic = null;
+    private MobileElement btnDeniedTakePic = null;
+
 
 
     public Permission(AndroidDriver<AndroidElement> ad) {
+        try {
+        _ad = ad;
+
+         btnAllowGps = _ad.findElementById("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+         btnDenyGps = _ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
+         btnAllowTakePic = _ad.findElementById("com.android.permissioncontroller:id/permission_allow_button");
+         btnDeniedTakePic = _ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
-    public Permission() {
 
-    }
 
     public void AllowGps() throws MalformedURLException {
-
-        _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-        getBtnAllowGps().click();
-
+    try {
+    _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+    btnAllowGps.click();
+    }catch (Exception e){
+        System.out.println(e);
+    }
     }
 
 
@@ -47,12 +58,12 @@ public class Permission {
 
 
     }
-
+/*
     public MobileElement getBtnAllowGps() {
         return btnAllowGps;
     }
 
     public void setBtnAllowGps(MobileElement btnAllowGps) {
         this.btnAllowGps = btnAllowGps;
-    }
+    }*/
 }
