@@ -13,11 +13,12 @@ public class SearchProduct {
     private AndroidDriver<AndroidElement> _ad;
     String sku;
     String productName;
-    private MobileElement searchBarBtn = null;
+   private MobileElement searchBarBtn = null;
     private MobileElement searchBarInput = null;
     private MobileElement productDetailBtn = null;
     private MobileElement deparmentMenu = null;
-    private MobileElement addToCartFromListBtn;
+    private MobileElement addToCartFromListBtn = null;
+
 
 
 
@@ -27,12 +28,12 @@ public class SearchProduct {
 
 
 
-        searchBarBtn  = _ad.findElementByAccessibilityId("Search-bar-btn");
-        searchBarInput = _ad.findElementByAccessibilityId("Search-bar-input");
+        searchBarBtn  = automation.ad.findElementByAccessibilityId("Search-bar-btn");
+     /*   searchBarInput = automation.ad.findElementByAccessibilityId("Search-bar-input");
         productDetailBtn  =  _ad.findElementByAccessibilityId("go-to-product-detail-btn");
         deparmentMenu = _ad.findElementByAccessibilityId("Departamentos, tab, 2 of 4");
-        addToCartFromListBtn = _ad.findElementByAccessibilityId("add-to-card-from-list-btn");
 
+*/
         }catch (Exception e){
             System.out.println(e);
         }
@@ -43,7 +44,7 @@ public class SearchProduct {
 
 
 
-        deparmentMenu.click();
+        //deparmentMenu.click();
 
         _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
@@ -66,27 +67,26 @@ public class SearchProduct {
 
     }
 
-    public void searchBarSKU() {
+    public void searchBarSKU() throws MalformedURLException {
         try {
         sku = "I3090045";
         searchBarBtn.click();
-        //inputSearchBar.click();
+        searchBarInput = _ad.findElementByAccessibilityId("Search-bar-input");
          searchBarInput.sendKeys(sku);
-        Assert.assertEquals(sku, searchBarInput.getText());
+         Assert.assertEquals(sku, searchBarInput.getText());
         _ad.pressKey(new KeyEvent(AndroidKey.ENTER));
-
-        Assert.assertEquals(productDetailBtn.getText(), sku);
-        addToCartFromListBtn.click();
+         Assert.assertEquals(productDetailBtn.getText(), sku);
+         addToCartFromListBtn = _ad.findElementByAccessibilityId("add-to-card-from-list-btn");
+         addToCartFromListBtn.click();
 
         }catch (Exception e){
             System.out.println(e);
         }
 
-        //return (sku);
 
     }
 
-    public void SearchBarProductName() throws MalformedURLException {
+  /*  public void SearchBarProductName() throws MalformedURLException {
         productName = "escoba";
 
         searchBarBtn.click();
@@ -95,11 +95,12 @@ public class SearchProduct {
         _ad.pressKey(new KeyEvent(AndroidKey.ENTER));
 
         Assert.assertEquals(productDetailBtn.getText(), productName);
+           }
+
+*/
 
 
 
-
-    }
 
     public void SearchBarSugested() throws MalformedURLException {
         MobileElement inputSearchBar = _ad.findElementByAccessibilityId("Search-bar-btn");

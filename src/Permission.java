@@ -19,10 +19,6 @@ public class Permission {
         try {
         _ad = ad;
 
-         btnAllowGps = _ad.findElementById("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
-         btnDenyGps = _ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
-         btnAllowTakePic = _ad.findElementById("com.android.permissioncontroller:id/permission_allow_button");
-         btnDeniedTakePic = _ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
         }catch (Exception e){
             System.out.println(e);
         }
@@ -32,8 +28,10 @@ public class Permission {
 
     public void AllowGps() throws MalformedURLException {
     try {
-    _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-    btnAllowGps.click();
+        btnAllowGps = _ad.findElementById("com.android.permissioncontroller:id/permission_allow_foreground_only_button");
+
+        _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        btnAllowGps.click();
     }catch (Exception e){
         System.out.println(e);
     }
@@ -41,18 +39,21 @@ public class Permission {
 
 
     public void deniedGps() throws MalformedURLException {
+        btnDenyGps = _ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
         _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         btnDenyGps.click();
 
     }
 
     public void allowTakePicture() throws MalformedURLException {
+        btnAllowTakePic = _ad.findElementById("com.android.permissioncontroller:id/permission_allow_button");
         _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         btnAllowTakePic.click();
 
     }
 
     public void deniedTakePicture() throws MalformedURLException {
+        btnDeniedTakePic = _ad.findElementById("com.android.permissioncontroller:id/permission_deny_button");
         _ad.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         btnDeniedTakePic.click();
 

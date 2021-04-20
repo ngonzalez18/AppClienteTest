@@ -23,11 +23,10 @@ public class CheckoutDelivery {
 
             addNewAddressBtn = _ad.findElementByAccessibilityId("add-new-address-btn");
             selectAddress = _ad.findElementByAccessibilityId("select-address-btn");
-            fechaEnvio = _ad.findElementByAccessibilityId("open-date-calendar-modal-btn");
-            diaEnvio = _ad.findElementByAccessibilityId("30 April 2021");
-            goToPaymentMethod = _ad.findElementByAccessibilityId("go-to-payment-btn");
-            btnOkSelectedDate = _ad.findElementById("android:id/button1");
-            btnCancelSelectedDate = _ad.findElementById("android:id/button2");
+
+
+
+
         }catch (Exception e){
             System.out.println(e);
         }
@@ -53,17 +52,22 @@ public class CheckoutDelivery {
         boolean isSelected = selectAddress.isSelected();
     }
     public void SelectShippingDate() throws MalformedURLException {
+        fechaEnvio = _ad.findElementByAccessibilityId("open-date-calendar-modal-btn");
+        diaEnvio = _ad.findElementByAccessibilityId("30 April 2021");
         fechaEnvio.click();
 
     }
     public void AceptarFecha() throws MalformedURLException {
+        btnOkSelectedDate = _ad.findElementById("android:id/button1");
         btnOkSelectedDate.click();
 
     }
     public void CancelarFecha() throws MalformedURLException {
+        btnCancelSelectedDate = _ad.findElementById("android:id/button2");
         btnCancelSelectedDate.click();
 
     } public void GoToPaymentMethod() throws MalformedURLException {
+        goToPaymentMethod = _ad.findElementByAccessibilityId("go-to-payment-btn");
         goToPaymentMethod.click();
 
     }

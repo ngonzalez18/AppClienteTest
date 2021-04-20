@@ -1,8 +1,11 @@
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
@@ -56,6 +59,7 @@ public class Login {
         Assert.assertEquals(UserEmail, email.getText());
         //passwordInput
         passwordInput.click();
+        File scrFile = ((TakesScreenshot)_ad).getScreenshotAs(OutputType.FILE);
         passwordInput.sendKeys(UserPassword);
 
 

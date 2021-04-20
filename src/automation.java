@@ -49,6 +49,12 @@ public class automation {
         Permission MyPermission = new Permission(ad);
         MyPermission.AllowGps();
 
+      /*  MobileElement el14 = (MobileElement) ad.findElementByAccessibilityId("Search-bar-btn");
+        el14.click();
+        el14.click();
+        MobileElement el15 = (MobileElement) ad.findElementByAccessibilityId("Search-bar-input");
+        el15.sendKeys("escoba");*/
+
         SearchProduct MySearchProduct = new SearchProduct(ad);
         MySearchProduct.searchBarSKU();
 
@@ -58,9 +64,21 @@ public class automation {
 
         CheckoutDelivery MyCheckout = new CheckoutDelivery(ad);
         MyCheckout.SelectAddress();
+        MyCheckout.SelectShippingDate();
+        MyCheckout.AceptarFecha();
+        MyCheckout.GoToPaymentMethod();
+
+        
+        ad.quit();
+
+        //Caso #2
+
 
         CheckoutSucursal MyCheckoutSucursal = new CheckoutSucursal(ad);
         MyCheckoutSucursal.tabSucursal();
+        MyCheckoutSucursal.selectSucursal();
+        MyCheckoutSucursal.Scroll();
+
 
 
 
