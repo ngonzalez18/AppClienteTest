@@ -2,19 +2,14 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
-import kong.unirest.JsonNode;
-import kong.unirest.Unirest;
-import org.openqa.selenium.interactions.touch.TouchActions;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
 
 public class automation {
 
@@ -23,8 +18,11 @@ public class automation {
 
     public static MobileElement mobileElement;
 
+    public automation(AndroidDriver<AndroidElement> ad) {
+    }
 
-    public static void ConfigInit() throws MalformedURLException {
+
+    public  void ConfigInit() throws MalformedURLException {
         DesiredCapabilities dc = new DesiredCapabilities();
         dc.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
         dc.setCapability("platformName", "android");
@@ -38,10 +36,13 @@ public class automation {
     public static void main(String args[]) throws MalformedURLException {
 
         //Caso 1 - E2E
-        ConfigInit();
+        automation myConfigInit= new automation(ad);
+        myConfigInit.ConfigInit();
+
 
         WelcomeScreen MyWelcomeScreen = new WelcomeScreen(ad);
         MyWelcomeScreen.SkipWelcomeScreen();
+
 
         Login MyLogin = new Login(ad);
         MyLogin.correctLogin();
@@ -49,16 +50,11 @@ public class automation {
         Permission MyPermission = new Permission(ad);
         MyPermission.AllowGps();
 
-      /*  MobileElement el14 = (MobileElement) ad.findElementByAccessibilityId("Search-bar-btn");
-        el14.click();
-        el14.click();
-        MobileElement el15 = (MobileElement) ad.findElementByAccessibilityId("Search-bar-input");
-        el15.sendKeys("escoba");*/
-
         SearchProduct MySearchProduct = new SearchProduct(ad);
         MySearchProduct.searchBarSKU();
 
         ShoppingCart MyShopingCart = new ShoppingCart(ad);
+
         MyShopingCart.addProduct();
         MyShopingCart.btnGoToCheckout();
 
@@ -68,19 +64,34 @@ public class automation {
         MyCheckout.AceptarFecha();
         MyCheckout.GoToPaymentMethod();
 
-        
-        ad.quit();
+        PaymentMethodCard MyPaymentMethodCard = new PaymentMethodCard(ad);
+        MyPaymentMethodCard.NewCard();
+
+        TransaccionCulminada MyTransaccionCulminada = new TransaccionCulminada(ad);
+        MyTransaccionCulminada.BotonSeguirCompando();
+
+    }
+
+        public  void Quit() throws MalformedURLException {
+
+      ad.quit();
+
+  }
+
 
         //Caso #2
 
-
+/*
         CheckoutSucursal MyCheckoutSucursal = new CheckoutSucursal(ad);
         MyCheckoutSucursal.tabSucursal();
         MyCheckoutSucursal.selectSucursal();
         MyCheckoutSucursal.Scroll();
 
 
+        PaymentMethodCard MyPaymentMethodCard = new PaymentMethodCard(ad);
+        MyPaymentMethodCard.NewCard();
 
+*/
 
 
 
@@ -88,10 +99,6 @@ public class automation {
         MySucursal.ValidarSucursal();*/
 
 
-
-
-
-
-
     }
-}
+
+

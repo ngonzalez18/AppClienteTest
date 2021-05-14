@@ -12,15 +12,16 @@ public class ShoppingCart {
     private MobileElement btnPayGoToCheckout = null;
     private MobileElement deleteProduct = null;
     private MobileElement createQuotation = null;
+    private MobileElement shoppingCartBtn = null;
 
 
     public ShoppingCart(AndroidDriver<AndroidElement> ad) {
         _ad = ad;
         try {
-            shoppingCartProduct = _ad.findElementByAccessibilityId("Shopping-list-product-btn");
-            btnPayGoToCheckout = _ad.findElementByAccessibilityId("btnDelgo-to-checkout-btneteProduct");
-            deleteProduct  =  _ad.findElementByAccessibilityId("delete-shopping-list-btn");
-            createQuotation = _ad.findElementByAccessibilityId("quote-btn");
+
+            shoppingCartBtn = _ad.findElementByXPath("//android.view.ViewGroup[@content-desc=\"Shopping-cart-btn\"]/android.view.ViewGroup[1]/android.widget.ImageView");
+
+
         }catch (Exception e){
         System.out.println(e);
     }
@@ -28,8 +29,14 @@ public class ShoppingCart {
     }
     public void addProduct() throws MalformedURLException {
         try {
+           /* shoppingCartProduct = _ad.findElementByAccessibilityId("go-to-product-detail-btn");
             sku = "I3090045";
             Assert.assertEquals(sku, shoppingCartProduct.getText());
+           // shoppingCartProduct.click();*/
+            shoppingCartBtn.click();
+
+
+
 
 
         } catch (Exception e) {
@@ -51,6 +58,7 @@ public class ShoppingCart {
 
     public void deleteProduct() throws MalformedURLException {
         Assert.assertEquals(sku, shoppingCartProduct.getText());
+        deleteProduct  =  _ad.findElementByAccessibilityId("delete-shopping-list-btn");
         deleteProduct.click();
       //  Assert.assertEquals(sku, shoppingCartProduct.getText());
       //  Assert.assertFalse(sku, shoppingCartProduct.getText());
@@ -63,10 +71,21 @@ public class ShoppingCart {
     }
     public void btnGoToCheckout() throws MalformedURLException {
         //clic al boton pagar
-
+        try {
+        btnPayGoToCheckout = _ad.findElementByAccessibilityId("go-to-checkout-btn");
         btnPayGoToCheckout.click();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
+    public void Cotizacion() throws MalformedURLException {
+        createQuotation = _ad.findElementByAccessibilityId("quote-btn");
+        createQuotation.click();
+
+    }
+
+
 
 
 }

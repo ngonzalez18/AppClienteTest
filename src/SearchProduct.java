@@ -108,6 +108,12 @@ public class SearchProduct {
 
     }
 
+    public void Execution() throws MalformedURLException {
+        MobileElement inputSearchBar = _ad.findElementByAccessibilityId("Search-bar-btn");
+        inputSearchBar.sendKeys("");
+
+    }
+
 
 
 
