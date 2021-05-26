@@ -35,7 +35,7 @@ public class automation {
 
     public static void main(String args[]) throws MalformedURLException {
 
-        //Caso 1 - E2E
+       /* //Caso 1 - E2E
         automation myConfigInit= new automation(ad);
         myConfigInit.ConfigInit();
 
@@ -44,10 +44,10 @@ public class automation {
         MyWelcomeScreen.SkipWelcomeScreen();
 
 
-        Login MyLogin = new Login(ad);
-        MyLogin.correctLogin();
+       /* Login MyLogin = new Login(ad);
+        MyLogin.correctLogin();*/
 
-        Permission MyPermission = new Permission(ad);
+      /*  Permission MyPermission = new Permission(ad);
         MyPermission.AllowGps();
 
         SearchProduct MySearchProduct = new SearchProduct(ad);
@@ -69,7 +69,7 @@ public class automation {
 
         TransaccionCulminada MyTransaccionCulminada = new TransaccionCulminada(ad);
         MyTransaccionCulminada.BotonSeguirCompando();
-
+*/
     }
 
         public  void Quit() throws MalformedURLException {
